@@ -100,3 +100,36 @@ Next: python manage.py makemigrations blog + migrate
 
 Say "next" for `admin.py` registration.
 ```
+Migrations Section
+
+### 8. Create Database Tables (Migrations)
+```bash
+python manage.py makemigrations blog    # Generate migration files from models
+python manage.py migrate                # Apply migrations → Create tables
+```
+What happens:
+
+- makemigrations: Scans blog/models.py → Creates blog/migrations/0001_initial.py
+
+- migrate: Runs migration → Creates tables: blog_category, blog_post, blog_comment
+
+Output:
+
+```text
+blog/migrations/0001_initial.py
+  - Create model Category
+  - Create model Post  
+  - Create model Comment
+OK
+```
+Why both commands:
+
+- makemigrations = "Blueprint" (Python file with changes)
+
+- migrate = "Build" (actually creates DB tables)
+
+Add to `.gitignore`:
+
+text
+db.sqlite3  # Don't commit database!
+text
