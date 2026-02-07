@@ -53,3 +53,4 @@ class Comment (models.Model):
         # Translates object to human-readable string (title) for admin/shell/print
         # Without this: shows "<Post object (1)>"; With: shows actual title
         return self.author
+    
