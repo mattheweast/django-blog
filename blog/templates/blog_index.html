@@ -1,8 +1,17 @@
-{% extends 'base.html' %}
-{% block page_content %}
-<h1>Blog Posts</h1>
-{% for post in posts %}
-    <h2><a href="{% url 'blog_details' pk=post.pk %}">{{ post.title }}</a></h2>
-    <p>{{ post.body|truncatewords:30 }}</p>
-{% endfor %}
-{% endblock %}
+{% extends 'base.html' %}  
+{% block page_content %}  
+<h1>Blog Posts</h1>  
+{% for post in posts %}  
+    <h2><a href="{% url 'blog_detail' pk=post.pk %}">{{ post.title }}</a></h2>  
+    <p>{{ post.body|truncatewords:30 }}</p>  
+{% empty %}  
+    <p>No posts—add in <a href="/admin/blog/post/">admin</a>.</p>  
+{% endfor %}  
+
+<h3>Categories:</h3>  
+{% for category in categories %}  
+    <a href="{% url 'blog_category' category=category.name %}">{{ category.name }}</a>  
+{% empty %}  
+    <p>No categories.</p>  
+{% endfor %}  
+{% endblock %}  

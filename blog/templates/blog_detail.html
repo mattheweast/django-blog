@@ -1,6 +1,18 @@
-{% extends 'base.html' %}
-{% block page_content %}
-<h1>{{ post.title }}</h1>
-<p>{{ post.body }}</p>
-<p>{{ post.created_on }}</p>
-{% endblock %}
+{% extends 'base.html' %}  
+{% block page_content %}  
+    <h1>{{ post.title }}</h1>  
+    <p>{{ post.body }}</p>  
+    <hr>  
+    {% for comment in comments %}  
+        <p>{{ comment.author }}: {{ comment.body }}</p>  
+    {% empty %}  
+        <p>No comments yet.</p>  
+    {% endfor %}  
+    <hr>  
+    <h3>Add Comment</h3>  
+    <form method="post">  
+        {% csrf_token %}  
+        {{ form.as_p }}  
+        <button type="submit">Submit</button>  
+    </form>  
+{% endblock %}  
