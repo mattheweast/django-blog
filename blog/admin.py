@@ -1,3 +1,7 @@
-from django.contrib import admin
+from django.contrib import admin # type: ignore
+from .models import Category, Post, Comment # Import your models
 
-# Register your models here.
+# Register each model in admin interface (shows as sectiopns)
+admin.site.register(Category)
+admin.site.register(Post)
+admin.site.register(Comment)
