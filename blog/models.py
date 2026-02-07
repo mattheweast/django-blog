@@ -1,4 +1,5 @@
 from django.db import models # type: ignore
+from django.contrib.auth.models import User # type: ignore
 
 # Create your models here.
 # Django Models Notes:
@@ -41,7 +42,16 @@ class Post(models.Model):
         return self.title
     
 class Comment (models.Model):
-    author = models.CharField(max_length=60) # Commenter's name
+    # NEW: Link to actual User account (optional for backward compatibility)
+    # null=True: database can store NULL
+    # blank=True: form validation allows empty
+    # on_delete=SET_NULL: if user deleted, keep the comment but clear the user link
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="comments")
+    
+    # OLD: Keep for existing comments that were made before authentication
+    # This can be removed later after migrating old data
+    author = models.CharField(max_length=60, blank=True) # Commenter's name (legacy)
+    
     body = models.TextField() # Comment text
 
     created_on = models.DateTimeField(auto_now_add=True) # Timestamp
@@ -50,7 +60,6 @@ class Comment (models.Model):
     post = models.ForeignKey("Post", on_delete=models.CASCADE)
 
     def __str__(self):
-        # Translates object to human-readable string (title) for admin/shell/print
-        # Without this: shows "<Post object (1)>"; With: shows actual title
-        return self.author
+        # Display username if available, otherwise use legacy author field
+        return self.user.username if self.user else self.author
     

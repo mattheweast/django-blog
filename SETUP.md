@@ -77,9 +77,26 @@ Purpose: Python classes → Database tables
 
 - Post → blog_post table
 
-- Comment → blog_comment table
+- Comment → blog_comment table (with ForeignKey to User for authentication)
 
 Next: python manage.py makemigrations blog + migrate
+
+### 8. User Authentication (Added)
+
+Features implemented:
+- User registration with Django's UserCreationForm
+- Login/logout using django.contrib.auth built-in views
+- Comments linked to user accounts (Comment.user ForeignKey)
+- Protected commenting (only authenticated users can comment)
+
+URLs:
+- `/register/` - User registration
+- `/accounts/login/` - Login page
+- `/accounts/logout/` - Logout
+
+Templates:
+- `personal_blog/templates/registration/` - Auth templates
+- `personal_blog/templates/base.html` - Shows login state in nav
 
 ### Key Concepts Learned
 

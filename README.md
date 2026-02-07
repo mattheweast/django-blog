@@ -2,6 +2,12 @@
 
 Small personal blog built with Django. This repository contains a minimal example app used for learning and small personal sites.
 
+Features
+- User authentication (registration, login, logout)
+- Blog posts with categories
+- Authenticated commenting system
+- Admin interface for content management
+
 Contents
 - `personal_blog/` — Django project (settings, root URLs, WSGI/ASGI)
 - `blog/` — Blog app: models, views, templates, forms, admin
@@ -36,8 +42,15 @@ Secrets & configuration
 Where to look
 - Read the component mapping in `ARCHITECTURE.md` for a short explanation of how the request flow and files interact.
 - App views: `blog/views.py`
-- Templates: `blog/templates/`
+- Templates: `blog/templates/` and `personal_blog/templates/`
 - Models (DB): `blog/models.py`
+- Authentication: Built-in Django auth (`django.contrib.auth`)
+
+Using the site
+- Visit `/register/` to create an account
+- Visit `/accounts/login/` to log in
+- Only authenticated users can post comments
+- Comments are linked to user accounts
 
 Contributing / Notes
 - This project is intentionally small and educational. If you publish it, rotate the `SECRET_KEY` and set `DEBUG=False` in production.

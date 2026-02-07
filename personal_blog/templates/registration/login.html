@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Login{% endblock %}
+
+{% block page_content %}
+<h1>Login</h1>
+
+{# Django's built-in login view passes 'form' to this template #}
+{# The form is an AuthenticationForm with username and password fields #}
+<form method="post">
+    {% csrf_token %}  {# Security token required for POST requests #}
+    
+    {# Display any errors (wrong username/password) #}
+    {% if form.errors %}
+        <p style="color: red;">Username or password is incorrect. Please try again.</p>
+    {% endif %}
+    
+    {# Render the form fields (username, password) #}
+    {{ form.as_p }}  {# as_p wraps each field in <p> tags #}
+    
+    <button type="submit">Login</button>
+</form>
+
+<p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Register{% endblock %}
+
+{% block page_content %}
+<h1>Create an Account</h1>
+
+{# UserCreationForm includes: username, password1, password2 #}
+{# Django automatically validates: passwords match, password strength, unique username #}
+<form method="post">
+    {% csrf_token %}  {# Security token for POST requests #}
+    
+    {# Display field errors (username taken, passwords don't match, etc.) #}
+    {{ form.as_p }}  {# Renders all form fields with labels and error messages #}
+    
+    <button type="submit">Sign Up</button>
+</form>
+
+<p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+{% endblock %}

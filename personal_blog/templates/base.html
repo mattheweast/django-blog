@@ -5,9 +5,29 @@
     <title>{% block page_title %}My Blog{% endblock %}</title>  
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />  
 </head>  
-<body>  
+<body>
+    <header>
+        <nav style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;">
+            <div>
+                <a href="{% url 'blog_index' %}">Home</a>
+            </div>
+            <div>
+                {# user object is ALWAYS available in templates (from auth context processor) #}
+                {# user.is_authenticated = True if logged in, False if anonymous #}
+                {% if user.is_authenticated %}
+                    {# Logged in: show username and logout link #}
+                    <span>Welcome, <strong>{{ user.username }}</strong>!</span> | 
+                    <a href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    {# Not logged in: show login and register links #}
+                    <a href="{% url 'login' %}">Login</a> | 
+                    <a href="{% url 'register' %}">Register</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>  
     <section>  
         {% block page_content %}{% endblock %}  
     </section>  
-</body>  
+</body>
 </html>  

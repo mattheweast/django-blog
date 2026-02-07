@@ -3,16 +3,27 @@
     <h1>{{ post.title }}</h1>  
     <p>{{ post.body }}</p>  
     <hr>  
-    {% for comment in comments %}  
-        <p>{{ comment.author }}: {{ comment.body }}</p>  
+    <h3>Comments</h3>
+    {% for comment in comments %}
+        <p>
+            {# Show username if comment has user, otherwise show legacy author field #}
+            <strong>{% if comment.user %}{{ comment.user.username }}{% else %}{{ comment.author }}{% endif %}</strong>: 
+            {{ comment.body }}
+        </p>  
     {% empty %}  
         <p>No comments yet.</p>  
     {% endfor %}  
     <hr>  
-    <h3>Add Comment</h3>  
-    <form method="post">  
-        {% csrf_token %}  
-        {{ form.as_p }}  
-        <button type="submit">Submit</button>  
-    </form>  
-{% endblock %}  
+    
+    {# Only show comment form if user is logged in #}
+    {% if user.is_authenticated %}
+        <h3>Add Comment</h3>  
+        <form method="post">  
+            {% csrf_token %}  
+            {{ form.as_p }}  
+            <button type="submit">Submit</button>  
+        </form>
+    {% else %}
+        <p><a href="{% url 'login' %}?next={{ request.path }}">Login</a> to leave a comment.</p>
+        {# ?next={{ request.path }} remembers where to return after login #}
+    {% endif %}

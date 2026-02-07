@@ -1,4 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect # type: ignore
+from django.contrib.auth.forms import UserCreationForm # type: ignore
+from django.contrib.auth import login # type: ignore
+from django.contrib.auth.decorators import login_required # type: ignore
 from .models import Post, Category, Comment
 from .forms import CommentForm
 
@@ -24,17 +27,26 @@ def blog_index(request):
 
 def blog_detail(request, pk): #pk from URL pattern
     post = get_object_or_404(Post, pk=pk)
-    comments = post.comment_set.all().order_by('-created_on')  # All comments  
-    form = CommentForm(request.POST or None)  # Handle form  
-    if form.is_valid():  
-        comment = form.save(commit=False)  
-        comment.post = post  
-        comment.save()  
-        return redirect('blog_detail', pk=post.pk)  
+    comments = post.comment_set.all().order_by('-created_on')  # All comments
+    
+    # Handle comment form - only for authenticated users
+    form = None
+    if request.user.is_authenticated:  # Check if user is logged in
+        if request.method == 'POST':
+            form = CommentForm(request.POST)  
+            if form.is_valid():  
+                comment = form.save(commit=False)  # Don't save yet
+                comment.post = post  # Link to current post
+                comment.user = request.user  # IMPORTANT: Set the user who wrote comment
+                comment.save()  # Now save to database
+                return redirect('blog_detail', pk=post.pk)  # Redirect to clear POST data
+        else:
+            form = CommentForm()  # Empty form for GET request
+    
     context = {
         'post': post,
         'comments': comments,
-        'form': form
+        'form': form  # Will be None if user not logged in
         }
     return render(request, 'blog_detail.html', context)
 
@@ -45,3 +57,26 @@ def blog_category(request, category):
         'posts': posts
     }
     return render(request, 'blog_category.html', context)
+
+def register(request):
+    """
+    User registration view.
+    - GET: Display empty registration form (UserCreationForm)
+    - POST: Validate form, create user, log them in automatically
+    
+    UserCreationForm provides:
+    - username field
+    - password1 (password)
+    - password2 (password confirmation)
+    - Built-in validation (passwords match, strong enough, etc.)
+    """
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)  # Bind form with submitted data
+        if form.is_valid():  # Check validation (passwords match, username unique, etc.)
+            user = form.save()  # Create the user in database (password auto-hashed)
+            login(request, user)  # Log the user in immediately after registration
+            return redirect('blog_index')  # Redirect to homepage
+    else:
+        form = UserCreationForm()  # Empty form for GET request
+    
+    return render(request, 'registration/register.html', {'form': form})
