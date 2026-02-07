@@ -23,7 +23,7 @@ def blog_index(request):
     return render(request, 'blog_index.html', context)
 
 def blog_detail(request, pk): #pk from URL pattern
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)
     comments = post.comment_set.all().order_by('-created_on')  # All comments  
     form = CommentForm(request.POST or None)  # Handle form  
     if form.is_valid():  

@@ -3,5 +3,6 @@
 <h1>{{ category|title }}</h1>
 {% for post in posts %}
     <h2><a href="{% url 'blog_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+    <p>{{ post.body|truncatewords:30 }}</p>
 {% endfor %}
 {% endblock %}
