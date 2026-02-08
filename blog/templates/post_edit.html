@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Edit Post | Feed{% endblock %}
+
+{% block page_content %}
+<div class="post-card">
+    <h1>Edit Post</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.title.id_for_label }}">Title:</label>
+            {{ form.title }}
+            {% if form.title.errors %}
+                <div class="error">{{ form.title.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.body.id_for_label }}">Content:</label>
+            {{ form.body }}
+            {% if form.body.errors %}
+                <div class="error">{{ form.body.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label>Categories:</label>
+            {{ form.categories }}
+            {% if form.categories.errors %}
+                <div class="error">{{ form.categories.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Update Post</button>
+            <a href="{% url 'blog_detail' pk=post.pk %}" class="btn btn-ghost">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

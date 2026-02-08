@@ -1,32 +1,29 @@
-/* Global reset and base typography */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Simple RSS Feed Style */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    line-height: 1.6;
-    color: #111827;
-    background-color: #f5f5f7;
+    font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    line-height: 1.7;
+    color: #000;
+    background-color: #fff;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Layout */
+/* Header */
 header {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid #e5e7eb;
-    position: sticky;
-    top: 0;
-    z-index: 20;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 nav {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0.9rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,325 +32,97 @@ nav {
 .nav-left {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 20px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto;
+    margin-right: 20px;
 }
 
 .nav-brand {
-    font-weight: 600;
-    font-size: 1.2rem;
-    color: #111827;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #000;
     text-decoration: none;
 }
 
-.nav-welcome {
-    font-size: 0.9rem;
-    color: #6b7280;
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-link {
+    color: #000;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
 }
 
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 10px;
 }
 
-main {
-    max-width: 1100px;
-    margin: 2.5rem auto 3.5rem auto;
-    padding: 0 1.5rem;
-}
-
-h1, h2, h3 {
-    color: #0f172a;
-    margin-bottom: 0.75rem;
-}
-
-h1 {
-    font-size: 1.6rem;
-}
-
-/* Links */
-a {
-    color: #2563eb;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Post list & detail */
-.post-list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 1.25rem;
-}
-
-.post-list-header h1 {
-    margin-bottom: 0;
-}
-
-.post-card {
-    background: #ffffff;
-    border-radius: 1rem;
-    padding: 1.6rem 1.8rem;
-    border: 1px solid rgba(148, 163, 184, 0.25);
-    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
-    margin-bottom: 1.4rem;
-}
-
-.post-card h2 {
-    margin-bottom: 0.45rem;
-}
-
-.post-meta {
-    font-size: 0.85rem;
-    color: #6b7280;
-    margin-bottom: 0.65rem;
-}
-
-.post-excerpt {
-    color: #4b5563;
-    font-size: 0.96rem;
-}
-
-.categories {
-    margin-top: 1.5rem;
-}
-
-.category-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.2rem 0.75rem;
-    border-radius: 999px;
-    background: #e0edff;
-    color: #1d4ed8;
-    font-size: 0.78rem;
-    margin-right: 0.4rem;
-    margin-bottom: 0.35rem;
-}
-
-.category-badge:hover {
-    background: #d0e2ff;
-}
-
-.post-content {
-    margin-top: 1rem;
-    color: #374151;
-    font-size: 1rem;
-}
-
-/* Empty state */
-.empty-state {
-    text-align: center;
-    padding: 3rem 1.5rem;
-    color: #6b7280;
-}
-
-.empty-state a {
-    font-weight: 500;
-}
-
-/* Comments */
-.comment-section {
-    margin-top: 2.5rem;
-}
-
-.comment-section h3 {
-    margin-bottom: 1rem;
-}
-
-.comment {
-    background: #ffffff;
-    border-radius: 0.75rem;
-    border: 1px solid #e5e7eb;
-    padding: 1.1rem 1.3rem;
-    margin-bottom: 0.9rem;
-}
-
-.comment-author {
-    font-weight: 600;
-    color: #1d4ed8;
-}
-
-.comment-date {
-    margin-left: 0.4rem;
-    font-size: 0.8rem;
-    color: #9ca3af;
-}
-
-.comment-body {
-    margin-top: 0.35rem;
-    color: #374151;
-}
-
-.comment-form {
-    margin-top: 1.75rem;
-}
-
-.comment-form form {
-    max-width: 100%;
-    background: transparent;
-    border: none;
+.nav-actions form {
+    display: inline;
+    margin: 0;
     padding: 0;
-}
-
-.comment-form textarea {
-    min-height: 0;
 }
 
 /* Buttons */
 .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.45rem 1rem;
-    border-radius: 999px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    border: 1px solid transparent;
+    background: none;
+    border: 1px solid #000;
+    padding: 5px 10px;
     cursor: pointer;
-    text-decoration: none;
     font-family: inherit;
-    transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-    white-space: nowrap;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: #000;
+    display: inline-block;
+    margin: 0;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+
+button.btn {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.btn:hover {
+    background: #000;
+    color: #fff;
+    text-decoration: none;
 }
 
 .btn-primary {
-    background-color: #2563eb;
-    border-color: #2563eb;
-    color: #ffffff;
-    box-shadow: 0 1px 2px rgba(37, 99, 235, 0.35);
+    background: #000;
+    color: #fff;
 }
 
 .btn-primary:hover {
-    background-color: #1d4ed8;
-    border-color: #1d4ed8;
+    background: #333;
 }
 
 .btn-ghost {
-    background-color: transparent;
-    border-color: #d1d5db;
-    color: #374151;
-}
-
-.btn-ghost:hover {
-    background-color: #f3f4f6;
-}
-
-button.btn,
-input[type="submit"].btn {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-/* Forms */
-form {
-    background: #ffffff;
-    padding: 1.75rem;
-    border-radius: 0.75rem;
-    border: 1px solid #e5e7eb;
-    max-width: 420px;
-}
-
-/* But keep header/logout form minimal so the button
-   doesn’t look like it’s wrapped in another button */
-header .nav-actions form {
-    background: transparent;
-    padding: 0;
-    border: none;
-    max-width: none;
-}
-
-form + p {
-    margin-top: 1rem;
-}
-
-input,
-textarea {
-    width: 100%;
-    padding: 0.6rem 0.75rem;
-    margin-bottom: 0.9rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
-    font-family: inherit;
-    font-size: 0.95rem;
-}
-
-input:focus,
-textarea:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 1px #2563eb33;
-}
-
-/* Form submit buttons inside auth forms */
-.auth-form-actions {
-    margin-top: 0.5rem;
-}
-
-.auth-form-actions .btn {
-    width: 100%;
-    justify-content: center;
-}
-
-/* Messages / errors */
-.error-text {
-    color: #b91c1c;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-}
-
-/* Generic content helpers */
-.text-muted {
-    color: #6b7280;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.page-card {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 0.9rem;
-    border: 1px solid #e5e7eb;
-    max-width: 480px;
-    margin: 0 auto;
-}
-
-.page-card p + p {
-    margin-top: 0.35rem;
-}
-
-/* Auth pages */
-.auth-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 140px);
-}
-
-.auth-page h1 {
-    margin-bottom: 1.25rem;
-}
-
-.auth-page form {
-    width: 100%;
-}
-
-.auth-page .text-muted {
-    margin-top: 1rem;
+    background: none;
+    border: 1px solid #000;
+    color: #000;
 }
 
 /* Theme toggle */
 .theme-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
+    font-size: 1.2rem;
 }
 
 .theme-toggle input {
@@ -361,103 +130,317 @@ textarea:focus {
 }
 
 .theme-toggle-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    color: #4b5563;
-    transition: color 0.15s ease;
+    display: inline-block;
 }
 
-.theme-toggle input:checked + .theme-toggle-icon {
-    color: #e5e7eb;
+/* Main content */
+main {
+    margin-top: 30px;
 }
 
-/* Dark mode overrides */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+/* Links */
+a {
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #551A8B;
+}
+
+a:hover {
+    color: #0000EE;
+}
+
+/* Post list */
+.post-list-header {
+    margin-bottom: 30px;
+}
+
+.post-card {
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.post-card h2 {
+    margin-bottom: 5px;
+}
+
+.post-card h2 a {
+    color: #000;
+    text-decoration: none;
+}
+
+.post-card h2 a:hover {
+    text-decoration: underline;
+}
+
+.post-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.post-excerpt {
+    color: #333;
+}
+
+.post-content {
+    margin-top: 20px;
+    color: #000;
+}
+
+/* Categories */
+.categories {
+    margin-top: 10px;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    margin-right: 5px;
+    border: 1px solid #666;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: #000;
+}
+
+.category-badge:hover {
+    background: #eee;
+}
+
+/* Comments */
+.comment-section {
+    margin-top: 40px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
+
+.comment {
+    border-left: 2px solid #ccc;
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #000;
+}
+
+.comment-date {
+    font-size: 0.85rem;
+    color: #666;
+    margin-left: 10px;
+}
+
+.comment-body {
+    margin-top: 5px;
+}
+
+/* Forms */
+form {
+    margin: 20px 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #000;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+    outline: 2px solid #000;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+.form-group ul {
+    list-style: none;
+    padding: 0;
+}
+
+.form-group ul li {
+    margin-bottom: 5px;
+}
+
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.error {
+    color: #c00;
+    font-size: 0.9rem;
+}
+
+/* Auth pages */
+.auth-page {
+    max-width: 400px;
+    margin: 50px auto;
+}
+
+.page-card {
+    border: 1px solid #000;
+    padding: 20px;
+}
+
+.auth-form-actions {
+    margin-top: 20px;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid #ccc;
+    margin-top: 60px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+footer p {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Dark mode */
 body.dark {
-    background-color: #020617;
-    color: #e5e7eb;
+    background-color: #000;
+    color: #fff;
 }
 
 body.dark header {
-    background: rgba(15, 23, 42, 0.94);
-    border-bottom-color: #1f2937;
+    border-bottom-color: #fff;
 }
 
-body.dark .nav-brand {
-    color: #e5e7eb;
+body.dark .nav-brand,
+body.dark .nav-link,
+body.dark .post-card h2 a {
+    color: #fff;
 }
 
-body.dark .nav-welcome {
-    color: #9ca3af;
+body.dark .btn {
+    border-color: #fff;
+    color: #fff;
 }
 
-body.dark .post-card,
-body.dark .page-card {
-    background: #020617;
-    border-color: #1f2937;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
-}
-
-body.dark .post-meta,
-body.dark .post-excerpt,
-body.dark .text-muted {
-    color: #9ca3af;
-}
-
-body.dark .category-badge {
-    background: #1f2937;
-    color: #e5e7eb;
-}
-
-body.dark .comment {
-    background: #020617;
-    border-color: #1f2937;
-}
-
-body.dark input,
-body.dark textarea {
-    background: #020617;
-    border-color: #374151;
-    color: #e5e7eb;
-}
-
-body.dark input:focus,
-body.dark textarea:focus {
-    border-color: #60a5fa;
-    box-shadow: 0 0 0 1px #60a5fa55;
+body.dark .btn:hover {
+    background: #fff;
+    color: #000;
 }
 
 body.dark .btn-primary {
-    background-color: #3b82f6;
-    border-color: #3b82f6;
+    background: #fff;
+    color: #000;
 }
 
 body.dark .btn-primary:hover {
-    background-color: #2563eb;
-    border-color: #2563eb;
+    background: #ccc;
 }
 
-body.dark .btn-ghost {
-    border-color: #4b5563;
-    color: #e5e7eb;
+body.dark .post-card {
+    border-bottom-color: #666;
 }
 
-body.dark .btn-ghost:hover {
-    background-color: #111827;
+body.dark .post-meta {
+    color: #999;
+}
+
+body.dark .post-excerpt,
+body.dark .post-content {
+    color: #ccc;
+}
+
+body.dark .category-badge {
+    border-color: #999;
+    color: #fff;
+}
+
+body.dark .category-badge:hover {
+    background: #333;
+}
+
+body.dark .comment {
+    border-left-color: #666;
+}
+
+body.dark .comment-date {
+    color: #999;
+}
+
+body.dark input[type="text"],
+body.dark input[type="password"],
+body.dark textarea {
+    background: #000;
+    border-color: #fff;
+    color: #fff;
+}
+
+body.dark .page-card {
+    border-color: #fff;
 }
 
 body.dark a {
-    color: #60a5fa;
+    color: #6af;
 }
 
-body.dark h1,
-body.dark h2,
-body.dark h3 {
-    color: #e5e7eb;
+body.dark a:visited {
+    color: #a6f;
 }
 
-body.dark .post-content,
-body.dark .comment-body {
-    color: #e5e7eb;
+body.dark footer {
+    border-top-color: #666;
+}
+
+body.dark footer p {
+    color: #999;
 }

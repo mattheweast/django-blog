@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     {% load static %}
-    <title>{% block page_title %}My Blog{% endblock %}</title>
+    <title>{% block page_title %}Feed{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
     <header>
         <nav>
             <div class="nav-left">
-                <a href="{% url 'blog_index' %}" class="nav-brand">🏠 My Blog</a>
-                {% if user.is_authenticated %}
-                    <span class="nav-welcome">Welcome, <strong>{{ user.username }}</strong></span>
-                {% endif %}
+                <div class="nav-links">
+                    <a href="{% url 'blog_index' %}" class="nav-link">Feed</a>
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="https://github.com/mattheweast" target="_blank" class="nav-link">gh</a>
+                <a href="https://www.linkedin.com/in/mattjeast/" target="_blank" class="nav-link">in</a>
             </div>
             <div class="nav-actions">
                 <label class="theme-toggle" aria-label="Toggle dark mode">
@@ -22,13 +25,13 @@
                 </label>
 
                 {% if user.is_authenticated %}
+                    <a href="{% url 'post_new' %}" class="btn btn-ghost">new+</a>
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-ghost">Logout</button>
                     </form>
                 {% else %}
                     <a href="{% url 'login' %}" class="btn btn-ghost">Login</a>
-                    <a href="{% url 'register' %}" class="btn btn-primary btn">Register</a>
                 {% endif %}
             </div>
         </nav>
@@ -36,6 +39,9 @@
     <main>
         {% block page_content %}{% endblock %}
     </main>
+    <footer>
+        <p>2026 | Matthew East</p>
+    </footer>
     <script src="{% static 'js/theme-toggle.js' %}"></script>
 </body>
 </html>
