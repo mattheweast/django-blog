@@ -1,33 +1,41 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-    <meta charset="UTF-8">  
-    <title>{% block page_title %}My Blog{% endblock %}</title>  
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />  
-</head>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title>{% block page_title %}My Blog{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
 <body>
     <header>
-        <nav style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;">
-            <div>
-                <a href="{% url 'blog_index' %}">Home</a>
-            </div>
-            <div>
-                {# user object is ALWAYS available in templates (from auth context processor) #}
-                {# user.is_authenticated = True if logged in, False if anonymous #}
+        <nav>
+            <div class="nav-left">
+                <a href="{% url 'blog_index' %}" class="nav-brand">🏠 My Blog</a>
                 {% if user.is_authenticated %}
-                    {# Logged in: show username and logout link #}
-                    <span>Welcome, <strong>{{ user.username }}</strong>!</span> | 
-                    <a href="{% url 'logout' %}">Logout</a>
+                    <span class="nav-welcome">Welcome, <strong>{{ user.username }}</strong></span>
+                {% endif %}
+            </div>
+            <div class="nav-actions">
+                <label class="theme-toggle" aria-label="Toggle dark mode">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="theme-toggle-icon">☾</span>
+                </label>
+
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-ghost">Logout</button>
+                    </form>
                 {% else %}
-                    {# Not logged in: show login and register links #}
-                    <a href="{% url 'login' %}">Login</a> | 
-                    <a href="{% url 'register' %}">Register</a>
+                    <a href="{% url 'login' %}" class="btn btn-ghost">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-primary btn">Register</a>
                 {% endif %}
             </div>
         </nav>
-    </header>  
-    <section>  
-        {% block page_content %}{% endblock %}  
-    </section>  
+    </header>
+    <main>
+        {% block page_content %}{% endblock %}
+    </main>
+    <script src="{% static 'js/theme-toggle.js' %}"></script>
 </body>
-</html>  
+</html>

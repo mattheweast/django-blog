@@ -3,7 +3,12 @@
 {% block page_title %}Logged Out{% endblock %}
 
 {% block page_content %}
-<h1>You've been logged out</h1>
-<p>Thanks for visiting! Come back soon.</p>
-<p><a href="{% url 'login' %}">Login again</a> or <a href="{% url 'blog_index' %}">return to homepage</a></p>
+<div class="page-card text-center">
+	<h1>You've been logged out</h1>
+	<p class="text-muted">Thanks for visiting! Come back anytime.</p>
+	<p style="margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: center;">
+		<a href="{% url 'login' %}" class="btn btn-primary">Login again</a>
+		<a href="{% url 'blog_index' %}" class="btn btn-ghost">Back to homepage</a>
+	</p>
+</div>
 {% endblock %}

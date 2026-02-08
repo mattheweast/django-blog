@@ -121,6 +121,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Additional places Django will look for static files (in development)
+STATICFILES_DIRS = [
+    BASE_DIR / 'personal_blog' / 'static',
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
 
